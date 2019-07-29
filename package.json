@@ -1,0 +1,7 @@
+{
+  "name": "MyToolsBackend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Inaki Breinbauer",
+  "license": "MIT"
+}
