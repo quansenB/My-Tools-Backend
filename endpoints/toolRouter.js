@@ -48,9 +48,8 @@ router.get("/name/:name", async (req, res) => {
 
 router.post("/", auth.restricted, async (req, res) => {
   try {
-    const newTool = req.body;
-    newTool.owner_id = req.user.id;
-    const tool = await Tools.insertTool(newTool);
+    req.body.owner_id = req.user.id;
+    const tool = await Tools.insertTool(req.body);
     if (tool) {
       return res.status(201).json(tool);
     } else {
@@ -63,10 +62,10 @@ router.post("/", auth.restricted, async (req, res) => {
 
 router.put("/:id", auth.restricted, async (req, res) => {
   try {
-    const tool = await Tools.getToolById(req.body.id);
+    const tool = await Tools.getToolById(req.params.id);
     if (tool.owner_id !== req.user.id) {
       return res
-        .status(400)
+        .status(401)
         .json({ message: "you don't have authorisation to modify this tool" });
     }
     const tool = await Tools.updateTool(req.params.id, req.body);
@@ -82,11 +81,11 @@ router.put("/:id", auth.restricted, async (req, res) => {
 
 router.delete("/:id", auth.restricted, async (req, res) => {
   try {
-    const tool = await Tools.getToolById(req.body.id);
+    const tool = await Tools.getToolById(req.params.id);
     if (tool.owner_id !== req.user.id) {
       return res
-        .status(400)
-        .json({ message: "you don't have authorisation to modify this tool" });
+        .status(401)
+        .json({ message: "you don't have authorisation to delete this tool" });
     }
     const num = await Tools.deleteTool(req.params.id);
     if (num > 0) {

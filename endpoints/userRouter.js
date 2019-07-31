@@ -1,5 +1,6 @@
 const express = require("express");
 const Users = require("../data/models/users-model.js");
+const Tools = require("../data/models/tools-model.js");
 const router = express.Router();
 const auth = require("../middleware/restricted.js");
 
@@ -96,8 +97,14 @@ router.get("/borrowed/", auth.restricted, async (req, res) => {
   }
 });
 
-router.get("/tool/:id/owner", async (req, res) => {
+router.get("/tool/:id/owner", auth.restricted, async (req, res) => {
   try {
+    const tool = await Tools.getToolById(req.params.id);
+    if (tool.owner_id !== req.user.id) {
+      return res
+        .status(401)
+        .json({ message: "you don't have authorisation to delete this tool" });
+    }
     const owner = await Users.getOwnerByToolId(req.params.id);
     if (owner) {
       return res.status(200).json(owner);
@@ -111,8 +118,14 @@ router.get("/tool/:id/owner", async (req, res) => {
   }
 });
 
-router.get("/tool/:id/borrower", async (req, res) => {
+router.get("/tool/:id/borrower", auth.restricted, async (req, res) => {
   try {
+    const tool = await Tools.getToolById(req.params.id);
+    if (tool.owner_id !== req.user.id) {
+      return res
+        .status(401)
+        .json({ message: "you don't have authorisation for this tool" });
+    }
     const borrower = await Users.getBorrowerByToolId(req.params.id);
     if (borrower) {
       return res.status(200).json(borrower);
