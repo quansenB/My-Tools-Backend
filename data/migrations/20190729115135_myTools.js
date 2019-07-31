@@ -49,6 +49,7 @@ exports.up = function(knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE")
         .notNullable();
+      table.string("status").notNullable();
       table.string("review_borrower");
       table.string("review_owner");
       table.dateTime("start_date").notNullable();

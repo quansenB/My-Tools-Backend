@@ -97,14 +97,8 @@ router.get("/borrowed/", auth.restricted, async (req, res) => {
   }
 });
 
-router.get("/tool/:id/owner", auth.restricted, async (req, res) => {
+router.get("/tool/:id/owner", async (req, res) => {
   try {
-    const tool = await Tools.getToolById(req.params.id);
-    if (tool.owner_id !== req.user.id) {
-      return res
-        .status(401)
-        .json({ message: "you don't have authorisation to delete this tool" });
-    }
     const owner = await Users.getOwnerByToolId(req.params.id);
     if (owner) {
       return res.status(200).json(owner);
