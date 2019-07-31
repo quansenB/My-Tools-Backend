@@ -1,6 +1,7 @@
 const express = require("express");
 const Users = require("../data/models/users-model.js");
 const router = express.Router();
+const auth = require("../middleware/restricted.js");
 
 router.get("/", async (req, res) => {
   try {
@@ -41,22 +42,9 @@ router.get("/name/:name", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.put("/", auth.restricted, async (req, res) => {
   try {
-    const user = await Users.insertUser(req.body);
-    if (user) {
-      return res.status(201).json(user);
-    } else {
-      return res.status(400).json({ message: "user could not be created" });
-    }
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-});
-
-router.put("/:id", async (req, res) => {
-  try {
-    const user = await Users.updateUser(req.params.id, req.body);
+    const user = await Users.updateUser(req.user.id, req.body);
     if (user) {
       return res.status(204).json(user);
     } else {
@@ -67,9 +55,9 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/", auth.restricted, async (req, res) => {
   try {
-    const num = await Users.deleteUser(req.params.id);
+    const num = await Users.deleteUser(req.user.id);
     if (num > 0) {
       return res.status(204).json({ message: "user deleted" });
     } else {
@@ -80,9 +68,9 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.get("/borrowings/:id", async (req, res) => {
+router.get("/borrowings/", auth.restricted, async (req, res) => {
   try {
-    const borrowings = await Users.getBorrowingsByUserId(req.params.id);
+    const borrowings = await Users.getBorrowingsByUserId(req.user.id);
     if (borrowings.lenght > 0) {
       return res.status(200).json(borrowings);
     } else {
@@ -93,9 +81,9 @@ router.get("/borrowings/:id", async (req, res) => {
   }
 });
 
-router.get("/borrowed/:id", async (req, res) => {
+router.get("/borrowed/", auth.restricted, async (req, res) => {
   try {
-    const borrowed = await Users.getBorrowedByUserId(req.params.id);
+    const borrowed = await Users.getBorrowedByUserId(req.user.id);
     if (borrowed.lenght > 0) {
       return res.status(200).json(borrowed);
     } else {
@@ -114,7 +102,9 @@ router.get("/tool/:id/owner", async (req, res) => {
     if (owner) {
       return res.status(200).json(owner);
     } else {
-      return res.status(404).json({ message: "No tool with this id available" });
+      return res
+        .status(404)
+        .json({ message: "No tool with this id available" });
     }
   } catch (err) {
     return res.status(500).json(err);
@@ -127,7 +117,9 @@ router.get("/tool/:id/borrower", async (req, res) => {
     if (borrower) {
       return res.status(200).json(borrower);
     } else {
-      return res.status(404).json({ message: "No tool with this id available" });
+      return res
+        .status(404)
+        .json({ message: "No tool with this id available" });
     }
   } catch (err) {
     return res.status(500).json(err);
