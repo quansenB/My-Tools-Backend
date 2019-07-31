@@ -1,5 +1,14 @@
 const db = require("../data/dbConfig.js");
 
+module.exports = {
+  getAllTools,
+  getToolById,
+  getToolsByName,
+  insertTool,
+  updateTool,
+  deleteTool
+};
+
 function getAllTools() {
   return db("tools");
 }
