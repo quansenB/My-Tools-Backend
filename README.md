@@ -85,13 +85,6 @@
 
 **Params:** Valid user ID.
 
-```js
-{
-  "username": "JolieJumbo",
-  "password": "abcdefgh"
-}
-```
-
 **Returns:** Message indicating the user has been deleted
 
 
