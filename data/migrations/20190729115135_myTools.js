@@ -52,7 +52,7 @@ exports.up = function(knex) {
       table.string("status").notNullable();
       table.string("review_borrower");
       table.string("review_owner");
-      table.dateTime("start_date").notNullable();
+      table.dateTime("start_date")
       table.dateTime("end_time");
     });
 };
