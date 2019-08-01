@@ -68,7 +68,8 @@ router.put("/:id", auth.restricted, async (req, res) => {
         .status(401)
         .json({ message: "you don't have authorisation to modify this tool" });
     }
-    const tool = await Tools.updateTool(req.params.id, req.body);
+    tool = null;
+    tool = await Tools.updateTool(req.params.id, req.body);
     if (tool) {
       return res.status(204).json(tool);
     } else {
@@ -97,3 +98,5 @@ router.delete("/:id", auth.restricted, async (req, res) => {
     return res.status(500).json(err);
   }
 });
+
+module.exports = router;

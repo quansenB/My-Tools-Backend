@@ -1,7 +1,7 @@
-const userRoutes = require("./data/userRouter.js");
-const toolRoutes = require("./data/toolRoutes.js");
-const authRoutes = require("./data/authRoutes.js");
-const borrowRoutes = require("./data/borrowRoutes.js");
+const userRoutes = require("./endpoints/userRouter.js");
+const toolRoutes = require("./endpoints/toolRouter.js");
+const authRoutes = require("./endpoints/authRouter.js");
+const borrowRoutes = require("./endpoints/borrowRouter.js");
 const express = require("express");
 const helmet = require("helmet");
 
@@ -11,11 +11,11 @@ server.get("/", (req, res) => {
   res.send(`<h2>Use /api/tools, /api/users, /api/auth or /api/borrow </h2>`);
 });
 
-server.use(helmet);
+server.use(helmet());
 
-server.use("/api/tools");
-server.use("/api/users");
-server.use("/api/auth");
-server.use("/api/borrow");
+server.use("/api/users", userRoutes);
+server.use("/api/tools", toolRoutes);
+server.use("/api/auth", authRoutes);
+server.use("/api/borrow", borrowRoutes);
 
 module.exports = server;

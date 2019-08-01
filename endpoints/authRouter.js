@@ -1,10 +1,11 @@
-const router = require("express").Router();
-const bcrypt = require("bcryptjs");
+const express = require('express');
+const router = express.Router(); 
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const Users = require("../data/models/users-model.js");
 
-router.post("/register", checkCredentials, async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     req.body.password = bcrypt.hashSync(req.body.password, 12);
     const user = await Users.insertUser(req.body);
@@ -45,6 +46,7 @@ function generateToken(user) {
 }
 
 function checkCredentials(req, res, next) {
+
   if (req.body.password.length < 8) {
     return res
       .status(400)
@@ -57,3 +59,5 @@ function checkCredentials(req, res, next) {
     next();
   }
 }
+
+module.exports = router;
