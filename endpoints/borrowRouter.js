@@ -4,8 +4,6 @@ const Tools = require("../data/models/tools-model.js");
 const router = express.Router();
 const auth = require("../middleware/restricted.js");
 
-//request(borrower), accept(owner), giveback(borrower), [review(owner)], see(both owner and borrower)
-
 router.get("/owner", auth.restricted, async (req, res) => {
   try {
     const lendings = await History.getLendingHistoryByUserid(req.user.id);
@@ -106,4 +104,4 @@ router.put("/takeback", auth.restricted, async (req, res) => {
   }
 });
 
-await Tools.updateTool(tool.id, { ...tool, bor });
+module.exports = router;

@@ -6,6 +6,9 @@ exports.up = function(knex) {
         .string("username")
         .unique()
         .notNullable();
+        table
+        .string("password")
+        .notNullable();
       table.string("location");
     })
     .createTable("tools", table => {

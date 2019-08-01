@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "Inaki Breinbauer",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
   "dependencies": {
     "bcrypt": "^3.0.6",
     "dotenv": "^8.0.0",
