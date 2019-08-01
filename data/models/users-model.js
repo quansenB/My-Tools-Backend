@@ -1,5 +1,19 @@
 const db = require("../data/dbConfig.js");
 
+module.exports = {
+  getAllUsers,
+  getUserById,
+  getUserByUsername,
+  insertUser,
+  updateUser,
+  deleteUser,
+  getBorrowingsByUserId,
+  getBorrowedByUserId,
+  getOwnerByToolId,
+  getBorrowerByToolId,
+  getReviewsByUserId
+};
+
 function getAllUsers() {
   return db("users");
 }
@@ -64,7 +78,7 @@ function getOwnerByToolId(tool_id) {
     .select("users.id", "users.name", "users.location");
 }
 
-function getOwnerByToolId(tool_id) {
+function getBorrowerByToolId(tool_id) {
   return db("users")
     .join("tools", "users.id", "tools.borrower_id")
     .where({ tool_id })
