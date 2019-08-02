@@ -3,7 +3,7 @@
 
 # Authentication
 
-## [POST] registration
+## [POST] Registration
 
 **URL:** `/api/auth/register`
 
@@ -19,7 +19,7 @@
 **Returns:** an object with user data and authentication token.
 
 
-## [POST] login
+## [POST] Login
 
 **URL:** `/api/auth/login`
 
@@ -174,21 +174,21 @@
 
 # Borrow History
 
-## [GET] owner
+## [GET] Owner
 
 **URL:** `/api/borrow/owner`
 
 **Returns:** complete lending and request history of the user making the request. Needs to identifiy with JSON Web Token.
 
 
-## [GET] borrower
+## [GET] Borrower
 
 **URL:** `/api/borrow/borrower`
 
 **Returns:** complete borrowing and request history of the user making the request. Needs to identifiy with JSON Web Token.
 
 
-## [POST] request
+## [POST] Request
 
 **URL:** `/api/borrow/request`
 
@@ -203,7 +203,7 @@
 **Returns:** an object with transaction data, indicating the tool has been requested by the user sending the API request.
 
 
-## [POST] accept
+## [POST] Accept
 
 **URL:** `/api/borrow/accept`
 
@@ -218,7 +218,7 @@
 **Returns:** an object with transaction data, indicating the tool has now been lent out to the user.
 
 
-## [POST] takeBack
+## [POST] Take back
 
 **URL:** `/api/borrow/takeback`
 
