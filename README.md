@@ -124,7 +124,7 @@
 **Returns:** an array with borrowed items data.
 
 
-#Tools
+# Tools
 
 ## [GET] Tools
 
@@ -171,7 +171,7 @@
 **Returns:** Message indicating the tool has been deleted
 
 
-#Borrow History
+# Borrow History
 
 ## [GET] owner
 
@@ -180,7 +180,7 @@
 **Returns:** complete lending and request history of the user making the request. Needs to identifiy with JSON Web Token.
 
 
-## [GET] owner
+## [GET] borrower
 
 **URL:** `/api/borrow/borrower`
 
