@@ -124,3 +124,110 @@
 **Returns:** an array with borrowed items data.
 
 
+#Tools
+
+## [GET] Tools
+
+**URL:** `/api/tools`
+
+**Returns:** an array with tool data.
+
+
+## [GET] Tool by ID
+
+**URL:** `/api/tools/:id`
+
+**Params:** Valid tool ID.
+
+**Returns:** an object with tool data.
+
+
+## [PUT] Tool
+
+**URL:** `/api/tools/:id`
+
+**Params:** Valid tool ID.
+
+**Payload:** an object containing the tool property/properties you want to update.
+
+```js
+{
+  "name": "Hammer",
+  "description": "Used with nails",
+  "owner_id": "1",
+  "borrower_id": "2"
+}
+```
+
+**Returns:** an object with user data.
+
+
+## [DELETE] User
+
+**URL:** `/api/tools/:id`
+
+**Params:** Valid tool ID.
+
+**Returns:** Message indicating the tool has been deleted
+
+
+#Borrow History
+
+## [GET] owner
+
+**URL:** `/api/borrow/owner`
+
+**Returns:** complete lending and request history of the user making the request. Needs to identifiy with JSON Web Token.
+
+
+## [GET] owner
+
+**URL:** `/api/borrow/borrower`
+
+**Returns:** complete borrowing and request history of the user making the request. Needs to identifiy with JSON Web Token.
+
+
+## [POST] request
+
+**URL:** `/api/borrow/request`
+
+**Payload:** an object with the following properties.
+
+```js
+{
+  "tool_id" : "23"
+}
+```
+
+**Returns:** an object with transaction data, indicating the tool has been requested by the user sending the API request.
+
+
+## [POST] accept
+
+**URL:** `/api/borrow/accept`
+
+**Payload:** an object with the following properties.
+
+```js
+{
+  "transaction_id" : "7"
+}
+```
+
+**Returns:** an object with transaction data, indicating the tool has now been lent out to the user.
+
+
+## [POST] takeBack
+
+**URL:** `/api/borrow/takeback`
+
+**Payload:** an object with the following properties.
+
+```js
+{
+  "transaction_id" : "7"
+}
+```
+
+**Returns:** an object with transaction data, indicating the tool has now been taken back from the borrower and is ready to be borrowed again.
+
