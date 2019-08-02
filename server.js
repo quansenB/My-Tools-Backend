@@ -8,7 +8,7 @@ const helmet = require("helmet");
 const server = express();
 
 server.get("/", (req, res) => {
-  res.send(`<h2>Use /api/tools, /api/users, /api/auth or /api/borrow </h2>`);
+  res.send(`<h2>Use /api/tools, /api/users, /api/auth or /api/borrow </h2></br><a href="https://github.com/quansenB/My-Tools-backend-">Documentation</a>`);
 });
 
 server.use(helmet());
