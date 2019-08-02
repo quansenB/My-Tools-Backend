@@ -1,5 +1,6 @@
 # API documentation
 
+
 # Authentication
 
 ## [POST] registration
@@ -32,7 +33,7 @@
 ```
 
 **Returns:** an object with user data and authentication token.
-  
+
 
 # Users
 
